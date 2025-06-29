@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<script>
+  const password = prompt("🎁 Enter the secret password to unlock the surprise:");
+  if (password !== "3006") {
+    document.write("<h2 style='color:red;text-align:center;'>❌ Access Denied: Wrong Password</h2>");
+    throw new Error("Access Denied");
+  }
+</script>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
