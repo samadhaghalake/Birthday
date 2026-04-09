@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Tulipss😘💖</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <canvas id="bgCanvas"></canvas>
+    <div class="stars"></div>
+    <div class="hearts" id="hearts"></div>
+
+    <audio id="bgMusic" loop>
+        <source src="song.mpeg" type="audio/mpeg">
+    </audio>
+
+    <div class="music-control" id="musicBtn" title="Play Music">🎵</div>
+
+
+    <section class="screen active" id="welcomeScreen">
+        <div class="glass card entry-card fade-up">
+            <p class="mini">A special birthday surprise</p>
+            <h1 class="main-title">For <span>Tulips</span> 💖</h1>
+            <p class="subtext">A little magical webpage made just for you</p>
+            <button class="primary-btn glow-btn" onclick="startExperience()">Start Surprise ✨</button>
+        </div>
+    </section>
+
+    <section class="screen" id="lockScreen">
+        <div class="glass card fade-up">
+            <p class="mini">Private access</p>
+            <h2>fakt maaz baal ch he open kru shakt😁😁 🔐</h2>
+            <p class="hint">Enter Your Lover Name </p>
+            <input type="text" id="answerInput" placeholder="Type answer here..." />
+            <button class="primary-btn" onclick="checkAnswer()">Unlock 💫</button>
+            <p id="lockMsg" class="lock-msg"></p>
+        </div>
+    </section>
+    <div class="screen" id="countdownScreen">
+        <h2>Get ready Baala 💖</h2>
+        <h1 id="count">5</h1>
+    </div>
+    <section class="screen" id="introScreen">
+        <div class="center-wrap">
+            <p class="cinematic" id="cinematicText"></p>
+        </div>
+    </section>
+    <section class="screen" id="storyScreen">
+        <div class="story-container">
+
+            <!-- progress bars -->
+            <div class="progress">
+                <div class="bar active"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <!-- story content -->
+            <div class="story" id="storyText"></div>
+
+        </div>
+    </section>
+
+    <section class="screen" id="messageScreen">
+        <div class="glass big-card fade-up">
+            <p class="mini">A message for you</p>
+            <h2 class="section-title">Dear Trupti 💌</h2>
+            <p id="typedMessage" class="typed-message"></p>
+            <button onclick="revealLove()">Tap to see something 💖</button>
+            <p id="loveMsg" style="display:none;"></p>
+            <div class="btn-row">
+                <button class="primary-btn" onclick="goToScreen('galleryScreen')">Next Memory 📸</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="screen" id="galleryScreen">
+        <div class="glass big-card fade-up">
+            <p class="mini">Beautiful moments</p>
+            <h2 class="section-title">Your Smile = Magic ✨</h2>
+
+            <div class="gallery-frame">
+                <img id="slideImage" src="photo1.jpg" alt="Trupti Photo" />
+                <div class="caption" id="photoCaption">The prettiest smile ever 😊</div>
+            </div>
+
+            
+
+
+            <div class="btn-row">
+                <button class="secondary-btn" onclick="prevSlide()">⟵ Prev</button>
+                <button class="primary-btn" onclick="goToScreen('reasonsScreen')">Next 💖</button>
+                <button class="secondary-btn" onclick="nextSlide()">Next ⟶</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="screen" id="reasonsScreen">
+        <div class="glass big-card fade-up">
+            <p class="mini">Just a few reasons</p>
+            <h2 class="section-title">Why you are special 🌸</h2>
+
+            <div class="reasons-grid">
+                <div class="reason-card">Your smile brightens everything ✨</div>
+                <div class="reason-card">You make moments feel beautiful 💕</div>
+                <div class="reason-card">Your presence feels warm and peaceful 🌙</div>
+                <div class="reason-card">You are truly one of a kind 💎</div>
+            </div>
+            <p>Who is the cutest? 😏</p>
+
+            <button onclick="answerLove()">You 💖</button>
+            <button onclick="answerLove()">Also You 💖</button>
+            <button onclick="answerLove()">Only You 💖</button>
+
+            <p id="answerMsg"></p>
+
+            <div class="btn-row">
+                <button class="primary-btn glow-btn" onclick="goToScreen('giftScreen')">Open Secret Surprise 🎁</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="screen" id="giftScreen">
+        <div class="center-wrap">
+            <div class="gift-box" onclick="openGift()" id="giftBox">
+                <div class="gift-lid"></div>
+                <div class="gift-body"></div>
+                <div class="gift-ribbon-v"></div>
+                <div class="gift-ribbon-h"></div>
+            </div>
+
+            <p class="gift-note">Tap the gift box 🎀</p>
+
+            <div class="gift-message glass" id="giftMessage">
+                <h2>Surprise for Trupti 💖</h2>
+                <p>
+                    On your birthday, I just want to say that you are truly special,
+                    beautiful, and unforgettable. May your day be filled with happiness,
+                    laughter, love, and all the wonderful things you deserve. 🎂✨
+                </p>
+                <button class="primary-btn" onclick="showFinale()">Final Surprise 🎆</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="screen" id="finalScreen">
+
+        <div class="glass final-card fade-up">
+            <p class="mini">The grand finale</p>
+            <h1 class="final-title">Happy Birthday Trupti 🎂💖</h1>
+            <p class="final-text">
+                May your life be filled with joy, love, success, peace, and beautiful memories.
+                Keep smiling always, because your smile makes the world brighter ✨
+                and always remember baala i love you forever 😘💗
+            </p>
+            <p onmouseover="hoverLove()" id="hoverText">
+                Touch me 😊
+            </p>
+            <p class="signature">Made with ❤️ by Samuu</p>
+
+            <div class="btn-row">
+                <button class="primary-btn" onclick="burstConfetti()">Celebrate Again 🎉</button>
+                <a class="whatsapp-btn" id="whatsappBtn" target="_blank">Send Reply on WhatsApp 💬</a>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
