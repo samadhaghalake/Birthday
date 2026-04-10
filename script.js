@@ -9,6 +9,8 @@ const heartsContainer = document.getElementById("hearts");
 const giftBox = document.getElementById("giftBox");
 const giftMessage = document.getElementById("giftMessage");
 const whatsappBtn = document.getElementById("whatsappBtn");
+const slideCount = document.getElementById("slideCount");
+const progressFill = document.getElementById("progressFill");
 
 
 const slides = [
@@ -96,25 +98,26 @@ because it looks the best on you 💫`;
         if (i >= message.length) clearInterval(typing);
     }, 26);
 }
-
 function updateSlide() {
     const slideImage = document.getElementById("slideImage");
     const photoCaption = document.getElementById("photoCaption");
-    const dots = document.getElementById("dots");
 
-    if (!slideImage || !photoCaption || !dots) return; // ✅ safety
+    if (!slideImage || !photoCaption) return;
 
-    slideImage.src = slides[currentSlide].src;
-    photoCaption.textContent = slides[currentSlide].caption;
+    slideImage.style.opacity = 0;
 
-    dots.innerHTML = "";
+    setTimeout(() => {
+        slideImage.src = slides[currentSlide].src;
+        photoCaption.textContent = slides[currentSlide].caption;
 
-    slides.forEach((_, index) => {
-        const dot = document.createElement("div");
-        dot.className = "dot" + (index === currentSlide ? " active" : "");
-        dots.appendChild(dot);
-    });
+        if (slideCount) {
+            slideCount.textContent = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        slideImage.style.opacity = 1;
+    }, 200);
 }
+
 function nextSlide() {
     currentSlide = (currentSlide + 1) % slides.length;
     updateSlide();
@@ -128,7 +131,20 @@ function prevSlide() {
 function startSlideshow() {
     slideIntervalStarted = true;
     updateSlide();
-    setInterval(nextSlide, 3000);
+
+    if (progressFill) progressFill.style.width = "100%";
+
+    setInterval(() => {
+        nextSlide();
+
+        if (progressFill) {
+            progressFill.style.width = "0%";
+            setTimeout(() => {
+                progressFill.style.width = "100%";
+            }, 50);
+        }
+
+    }, 3000);
 }
 
 function openGift() {
@@ -452,3 +468,21 @@ document.body.addEventListener("mousedown", () => {
 document.body.addEventListener("mouseup", () => {
     clearTimeout(pressTimer);
 });
+const gallery = document.querySelector(".gallery-frame");
+
+if (gallery) {
+    gallery.addEventListener("dblclick", () => {
+        let heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.style.position = "absolute";
+        heart.style.top = "50%";
+        heart.style.left = "50%";
+        heart.style.transform = "translate(-50%, -50%) scale(0)";
+        heart.style.fontSize = "60px";
+        heart.style.animation = "popHeart 0.6s ease forwards";
+
+        gallery.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 600);
+    });
+}
